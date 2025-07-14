@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 /* Custom Animations for the App */
 
 /* Typing animation for question text cursor */
@@ -38,17 +41,181 @@
     opacity: 0; /* Ensures the element is hidden before animation starts */
 }
 
-/* Important Note: 
-The 'Inter' font is typically configured within your tailwind.config.js file
-under the `theme.extend.fontFamily` section. 
-You do NOT need to add @font-face here if you've done that and imported 
-Tailwind's base styles. If you haven't, you would add it here:
-
-@font-face {
-    font-family: 'Inter';
-    src: url('/fonts/Inter-Regular.woff2') format('woff2'); /* Adjust path as needed */
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+/* Floating animation for background elements */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
 }
-*/
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse animation for interactive elements */
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6); }
+}
+
+.pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animated-gradient {
+    background: linear-gradient(-45deg, #3B82F6, #8B5CF6, #EC4899, #10B981);
+    background-size: 400% 400%;
+    animation: gradient-shift 3s ease infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #3B82F6, #8B5CF6);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #2563EB, #7C3AED);
+}
+
+/* Glass morphism effect */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Hover effects for cards */
+.card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Button press effect */
+.btn-press:active {
+    transform: scale(0.98);
+}
+
+/* Loading spinner */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Typewriter effect */
+@keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    animation: typewriter 3s steps(40, end), blink 0.75s step-end infinite;
+}
+
+/* Particle animation */
+@keyframes particle-float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: translateY(-100px) rotate(180deg);
+        opacity: 0.5;
+    }
+}
+
+.particle {
+    animation: particle-float 8s ease-in-out infinite;
+}
+
+/* Responsive design helpers */
+@media (max-width: 768px) {
+    .mobile-padding {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .mobile-text {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+}
+
+/* Focus states for accessibility */
+button:focus,
+input:focus,
+textarea:focus {
+    outline: 2px solid #3B82F6;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .glass {
+        background: rgba(0, 0, 0, 0.8);
+        border: 2px solid #ffffff;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+    body {
+        color-scheme: dark;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+    }
+}

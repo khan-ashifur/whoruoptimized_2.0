@@ -1,13 +1,114 @@
 <!doctype html>
-<html lang="en">
+<html lang="bn">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <meta name="description" content="কার্ল জং-এর মনোবিজ্ঞান তত্ত্বের উপর ভিত্তি করে ১৬ ব্যক্তিত্ব পরীক্ষা - আবিষ্কার করুন আপনার প্রকৃত ব্যক্তিত্ব" />
+    <meta name="keywords" content="ব্যক্তিত্ব পরীক্ষা, কার্ল জং, মনোবিজ্ঞান, MBTI, বাংলা" />
+    <meta name="author" content="WHORU Personality Test" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="WHORU - ১৬ ব্যক্তিত্ব পরীক্ষা" />
+    <meta property="og:description" content="কার্ল জং-এর মনোবিজ্ঞান তত্ত্বের উপর ভিত্তি করে আবিষ্কার করুন আপনার প্রকৃত ব্যক্তিত্ব" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.jpg" />
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WHORU - ১৬ ব্যক্তিত্ব পরীক্ষা" />
+    <meta name="twitter:description" content="কার্ল জং-এর মনোবিজ্ঞান তত্ত্বের উপর ভিত্তি করে আবিষ্কার করুন আপনার প্রকৃত ব্যক্তিত্ব" />
+    
+    <!-- Preload critical fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <title>WHORU - আপনি কে? | ১৬ ব্যক্তিত্ব পরীক্ষা</title>
+    
+    <style>
+      /* Critical CSS for initial load */
+      body {
+        font-family: 'Inter', system-ui, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #ec4899 100%);
+        min-height: 100vh;
+      }
+      
+      /* Loading spinner for initial page load */
+      .initial-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #ec4899 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      
+      .loader-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top: 3px solid #ffffff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Hide loader when React app loads */
+      #root:not(:empty) + .initial-loader {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- Initial loading spinner -->
+    <div class="initial-loader">
+      <div class="loader-spinner"></div>
+    </div>
+    
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- Performance and Analytics Scripts -->
+    <script>
+      // Performance monitoring
+      window.addEventListener('load', function() {
+        // Hide initial loader
+        const loader = document.querySelector('.initial-loader');
+        if (loader) {
+          loader.style.display = 'none';
+        }
+        
+        // Log performance metrics
+        if ('performance' in window) {
+          const perfData = performance.getEntriesByType('navigation')[0];
+          console.log('Page Load Time:', perfData.loadEventEnd - perfData.loadEventStart, 'ms');
+        }
+      });
+      
+      // Service Worker registration for PWA capabilities
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
